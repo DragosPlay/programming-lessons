@@ -29,3 +29,22 @@ class Customer:
     def change_quantity(self,
                     item:Product):
 class ShoppingCart:
+    def __init__(self):
+        self.items = {}
+
+    def add_item(self,
+                 product:str = 'None',
+                 quantity:int = 0):
+        self.items[product] = quantity
+
+    def remove_item(self,
+                    product:str = 'None',
+                    quantity:int = 0):
+        if self.items[product] - quantity > 0:
+            self.items[product] = self.items[product] - quantity
+        else:
+            self.items[product] = 0
+        def update_quantity(self,
+                            product:str = 'None',
+                            quantity:int = 0):
+            self.items[product] = quantity
