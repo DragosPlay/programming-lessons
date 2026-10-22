@@ -27,5 +27,11 @@ class CrewMember:
         self.skills = skills
         self.role = role
 
-class Mision:
+class Mission:
+    def __init__(self,
+                 goal:list = [],
+                 resources:dict = {},
+                 events:list = []):
+        self.goal = goal
+        self.resources = resources
 
