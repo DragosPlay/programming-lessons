@@ -12,15 +12,17 @@ class Product:
 
 class Order:
     def __init__(self,
+                 cart_items:dict,
                  discount:int = 0,
                  tax:int = 10
                  ):
+        self.cart_items = cart_items
         self.discount = discount
         self.tax = tax
 
     def total_price(self):
         total = 0
-        for product, quantity in self.items.items():
+        for product, quantity in self.cart_items.items():
             total += quantity * product.price
 
         total -= total * self.discount
@@ -34,9 +36,9 @@ class Customer:
         self.ID = ID
         self.order_history = []
 
-        def add_order(self,
-                      order):
-            self.order_history.append(order)
+    def add_order(self,
+                order):
+        self.order_history.append(order)
 
 class ShoppingCart:
     def __init__(self):
