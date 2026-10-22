@@ -58,3 +58,18 @@ class ShoppingCart:
                             product:str = 'None',
                             quantity:int = 0):
             self.items[product] = quantity
+
+
+best_of_the_best_fistables = Product(200, 44, 'Фистаблес', 'Шоколад')
+banana = Product(139, 244, 'Бананы', 'Фрукты')
+
+cart = ShoppingCart()
+cart.add_item(banana, 4)
+cart.add_item(best_of_the_best_fistables, 54)
+
+order = Order(cart.items, 0.4, 0.5)
+
+print(f'Итоговая цена корзины составляет {order.total_price()}')
+
+customer = Customer('1437')
+customer.add_order(order)
