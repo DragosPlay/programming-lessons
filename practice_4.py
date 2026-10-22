@@ -7,7 +7,8 @@ class SpaceShip:
         self.health = health
         self.speed = speed
 
-    def gaz(self, znach):
+    def gaz(self,
+            znach:float = '5'):
         if self.fuel > 0:
             self.speed += znach
             self.fuel -= 4
@@ -16,6 +17,15 @@ class SpaceShip:
             print(f'Нет топлива для газа(')
 
 class CrewMember:
+    def __init__(self,
+                 name:str = 'None',
+                 health:int = 100,
+                 skills:list = [],
+                 role:str = 'None'):
+        self.name = name
+        self.health = health
+        self.skills = skills
+        self.role = role
 
 class Mision:
 
