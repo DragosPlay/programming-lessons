@@ -33,7 +33,7 @@ class Player:
                 self.power += 5
                 self.stamina -= 10
                 print(f'Успешная тренировка, Ваша сила повышена до {self.power}')
-            elif self.power + 5 > 100:
+            else:
                 self.power = 100
                 self.stamina -= (100 - self.power) * 2
                 print(f'Успешная лёгкая тренировка, Ваша сила повышена до максимального уровня, расход выносливости составил {(100 - self.power) * 2}')
@@ -59,13 +59,24 @@ class Player:
                 self.health += points
                 self.stamina -= st_pt
                 print(f'Успешное лечение принесло {points} здоровья! Текущее значение: {self.health}')
-            elif self.health + (st_pt + 1) > 100:
+            else:
                 self.health = 100
                 st_pt = int((100 - self.health) / 2)
                 self.stamina -= st_pt
                 print(f'Здоровье повышено до максимум, расход выносливости составил {st_pt}')
         else:
             print(f'Для лечения недостаточно выносливости, отдохните. Текущий показатель: {self.health}')
+
+    def chill(self):
+        if self.stamina == 100:
+            print('Уровень вашей выносливости максимальный, отдых не требуется')
+        else:
+            if self.stamina + 31 <= 100:
+                self.stamina += 30
+                print(f'Выносливость восстановлена до {self.stamina}')
+            else:
+                self.stamina = 100
+                print(f'Выносливость восстановлена до максимального уровня')
 
 
 class shop:
