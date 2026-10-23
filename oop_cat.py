@@ -40,4 +40,4 @@ main_coon = Cats(
     ear_shape = 9
 )
 
-main_coon.info()
+main_coon.info(S)
