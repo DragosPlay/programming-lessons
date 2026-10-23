@@ -25,6 +25,49 @@ class Player:
         self.health = health
         self.stamina = stamina
 
+    def training(self):
+        if self.power == 100:
+            print('Ваша сила достагла максимального уровня, тренировка не требуется')
+        elif self.stamina >= 20 and self.health >= 40:
+            if self.power + 6 <= 100:
+                self.power += 5
+                self.stamina -= 10
+                print(f'Успешная тренировка, Ваша сила повышена до {self.power}')
+            elif self.power + 5 > 100:
+                self.power = 100
+                self.stamina -= (100 - self.power) * 2
+                print(f'Успешная лёгкая тренировка, Ваша сила повышена до максимального уровня, расход выносливости составил {(100 - self.power) * 2}')
+        else:
+            if self.stamina < 20:
+                stamina_error = True
+            if self.health < 40:
+                health_error = True
+            if stamina_error:
+                if health_error:
+                    print('Для тренировки недостаточно здоровья и выносливости')
+                else:
+                    print('Для тренировки недостаточно выносливости')
+            else:
+                print('Для тренировки недостаточно здоровья')
+
+    def treatment(self, points):
+        st_pt = points / 2  # расход стамины на запрашиваемое игроком лечение
+        if self.health == 100:
+            print('Лечение не требуется, ваше здоровье максимально')
+        elif self.stamine >= st_pt + 5:
+            if self.health + (st_pt + 1) <= 100:
+                self.health += points
+                self.stamina -= st_pt
+                print(f'Успешное лечение принесло {points} здоровья! Текущее значение: {self.health}')
+            elif self.health + (st_pt + 1) > 100:
+                self.health = 100
+                st_pt = int((100 - self.health) / 2)
+                self.stamina -= st_pt
+                print(f'Здоровье повышено до максимум, расход выносливости составил {st_pt}')
+        else:
+            print(f'Для лечения недостаточно выносливости, отдохните. Текущий показатель: {self.health}')
+
+
 class shop:
     def __init__(self,
                  item:str = 'None',
