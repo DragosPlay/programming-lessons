@@ -78,6 +78,13 @@ class Player:
                 self.stamina = 100
                 print(f'Выносливость восстановлена до максимального уровня')
 
+    def rebirth(self):
+        if self.health == 100 and self.power == 100 and self.stamina == 100:
+            self.star_balance += 1
+        self.health = 40
+        self.power = 20
+        self.stamina = 0
+
 
 class shop:
     def __init__(self,
