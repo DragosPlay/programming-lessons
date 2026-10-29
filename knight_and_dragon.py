@@ -10,6 +10,8 @@ Soft Deadline: 16: 00 - нужно показать прогресс за два
 Hard Deadline: 1 неделя - сдача итоговой работы
 '''
 
+import random
+
 class Player:
     def __init__(self,
                  nickname:str = 'BestPlayer',
@@ -17,7 +19,8 @@ class Player:
                  star_balance:int = 0,
                  power:int = 20,
                  health:int = 100,
-                 stamina:int = 100):
+                 stamina:int = 100,
+                 inventory:list = []):
         self.nickname = nickname
         self.money_balance = money_balance
         self.star_balance = star_balance
@@ -88,16 +91,62 @@ class Player:
             self.stamina = 0
 
 
+class item:
+    def __init__(self,
+                 name:str = 'None',
+                 star_rating:int = 0,
+                 damage:int = 0,
+                 durability:int = 100,
+                 armor:int = 0,
+                 ):
+        self.name = name
+        self.star_rating = star_rating
+        self.damage = damage
+        self.durability = durability
+        self.armor = armor
+
+    def upgrade(self, player):
+        if player.star_balance > self.star_rating:
+            upgrade_price = (self.star_rating + 1) * 100
+            if player.money_balance >= upgrade_price:
+                player.money_balance -= upgrade_price
+                if bool(random.getrandbits(1)):
+                    self.star_rating += 1
+                    self.durability += int(self.durability * 1.3)
+                    self.armor = int(self.armor * 1.15)
+                    self.damage = int(self.damage * 1.2)
+                    print(f'Успешное улучшение!')
+                else:
+                    print(f'Предмет не улудшен :C')
+            else:
+                print(f'Недостаточно денег для улучшения. Ваш баланс: {player.money_balance}, стоимость улучшения: {upgrade_price}')
+        else:
+            print('Ваш престиж не превышает престиж предмета, улучшение невозможно')
+
+    def repair(self, player, new_durability):
+        repair_pt = new_durability - self.durability
+        repair_price = (self.star_rating / 10 + 1) * repair_pt * 100
+        if player.money_balance >= repair_price:
+            self.durability = new_durability  # нет ограничения по максимальной прочности
+            print(f'Успешеный ремонт! Стоимость составила {repair_price}')
+        else:
+            print(f'Денег недостаточно для ремонта, его стоимость {repair_price}, ваш баланс {player.money_balance}')
+
+    def rename(self):
+        new_name = input('Введите новое имя предмета: ')
+        self.name = new_name
+
 class shop:
     def __init__(self,
-                 item:str = 'None',
+                 shop_item: item = None,
                  price:int = 0,
-                 amount:int = 0):
-        self.item = item
+                 amount:int = 0,
+                 ):
+        self.shop_item = shop_item
         self.price = price
         self.amount = amount
 
-    def buy_item(self):
+    def buy_item(self, player):
 
-    def sell_item(self):
+    def sell_item(self, player):
 
