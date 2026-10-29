@@ -104,10 +104,12 @@ class Player:
 
 class Dragon:
     def __init__(self,
-                 star_balance:int = 0,
+                 name:str = 'None',
                  power:int = 20,
                  health:int = 100,
-                 stamina:int = 100):
+                 stamina:int = 100,
+                 star_balance:int = 0):
+        self.name = name
         self.star_balance = star_balance
         self.power = power
         self.health = health
@@ -129,7 +131,7 @@ class Dragon:
                     self.stamina -= 5
 
 
-class item:
+class Item:
     def __init__(self,
                  name:str = 'None',
                  star_rating:int = 0,
@@ -174,9 +176,9 @@ class item:
         new_name = input('Введите новое имя предмета: ')
         self.name = new_name
 
-class shop:
+class Shop:
     def __init__(self,
-                 shop_item: item = None,
+                 shop_item: Item = None,
                  price:int = 0,
                  amount:int = 0,
                  min_player_lvl:int = 0
@@ -239,3 +241,91 @@ class SecretEnding(Ending):
     def show_title(self):
         print(f'Секретная концовка!')
         super().show_title()
+
+
+
+if __name__ == '__main__':
+    player = Player('Jora', 4500)
+
+    Toothless = Dragon('Беззубик', 35, 120, 120)
+    Stormfly = Dragon('Громгильда', 22, 110, 100)
+    Hookfang = Dragon('Кривоклык', 28, 115, 80)
+    Meatlug = Dragon('Сарделька', 15, 180, 90)
+    Barf_Belch = Dragon('Барс и Вепрь', 25, 130, 100)
+    Cloudjumper = Dragon('Облацепр', 26, 140, 110)
+    Skullcrusher = Dragon('Шлемолом', 30, 160, 80)
+    Grump = Dragon('Ворчун', 12, 200, 60)
+    Light_Fury = Dragon('Дневная Фурия',30, 100, 150)
+
+    Hauberk = Shop(
+        shop_item=Item(name='Хауберк', star_rating=0, damage=0, durability=100, armor=15),
+        price=120, amount=1, min_player_lvl=0
+    )
+    Gambeson = Shop(
+        shop_item=Item(name='Гамбезон', star_rating=0, damage=0, durability=80, armor=10),
+        price=80, amount=1, min_player_lvl=0
+    )
+    Aketon = Shop(
+        shop_item=Item(name='Акетон', star_rating=0, damage=0, durability=85, armor=12),
+        price=90, amount=1, min_player_lvl=0
+    )
+    Brigandine = Shop(
+        shop_item=Item(name='Бригантина', star_rating=1, damage=0, durability=150, armor=32),
+        price=300, amount=1, min_player_lvl=1
+    )
+    Cuirass = Shop(
+        shop_item=Item(name='Кираса', star_rating=2, damage=0, durability=220, armor=55),
+        price=550, amount=1, min_player_lvl=2
+    )
+    Coif = Shop(
+        shop_item=Item(name='Кольчужный капюшон', star_rating=0, damage=0, durability=70, armor=6),
+        price=50, amount=1, min_player_lvl=0
+    )
+    Sallet = Shop(
+        shop_item=Item(name='Салад', star_rating=1, damage=0, durability=110, armor=16),
+        price=160, amount=1, min_player_lvl=1
+    )
+    Barbuta = Shop(
+        shop_item=Item(name='Барбют', star_rating=1, damage=0, durability=120, armor=20),
+        price=200, amount=1, min_player_lvl=1
+    )
+    Bascinet = Shop(
+        shop_item=Item(name='Бацинет', star_rating=1, damage=0, durability=130, armor=24),
+        price=240, amount=1, min_player_lvl=1
+    )
+    Great_helm = Shop(
+        shop_item=Item(name='Топфхельм', star_rating=2, damage=0, durability=180, armor=42),
+        price=420, amount=1, min_player_lvl=2
+    )
+    Armet = Shop(
+        shop_item=Item(name='Армэ', star_rating=2, damage=0, durability=200, armor=48),
+        price=480, amount=1, min_player_lvl=2
+    )
+    Bevor = Shop(
+        shop_item=Item(name='Бувигер', star_rating=1, damage=0, durability=90, armor=10),
+        price=100, amount=1, min_player_lvl=1
+    )
+    Pauldrons = Shop(
+        shop_item=Item(name='Наплечники', star_rating=1, damage=0, durability=100, armor=14),
+        price=140, amount=1, min_player_lvl=1
+    )
+    Vambrace = Shop(
+        shop_item=Item(name='Наручи', star_rating=0, damage=0, durability=90, armor=8),
+        price=90, amount=1, min_player_lvl=0
+    )
+    Gauntlets = Shop(
+        shop_item=Item(name='Латные рукавицы', star_rating=1, damage=0, durability=95, armor=12),
+        price=130, amount=1, min_player_lvl=1
+    )
+    Cuisses = Shop(
+        shop_item=Item(name='Набедренники', star_rating=1, damage=0, durability=110, armor=15),
+        price=150, amount=1, min_player_lvl=1
+    )
+    Greaves = Shop(
+        shop_item=Item(name='Поножи', star_rating=0, damage=0, durability=100, armor=10),
+        price=110, amount=1, min_player_lvl=0
+    )
+    Sabatons = Shop(
+        shop_item=Item(name='Сабатоны', star_rating=1, damage=0, durability=80, armor=8),
+        price=95, amount=1, min_player_lvl=1
+    )
