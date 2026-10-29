@@ -27,6 +27,7 @@ class Player:
         self.power = power
         self.health = health
         self.stamina = stamina
+        self.inventory = inventory
 
     def training(self):
         stamina_error, health_error = False, False
@@ -89,6 +90,43 @@ class Player:
             self.health = 40
             self.power = 20
             self.stamina = 0
+
+    def attack(self, dragon):
+        if self.stamina >= 10:
+            if bool(random.getrandbits(1)):
+                dragon.health -= self.power * (self.star_balance / 10 + 1)
+                print(f'Критический удар! Здоровье дракона = {dragon.health}')
+                self.stamina -= 10
+            else:
+                dragon.health -= self.power
+                print(f'Удар! Здоровье дракона = {dragon.health}')
+                self.stamina -= 4
+
+class Dragon:
+    def __init__(self,
+                 star_balance:int = 0,
+                 power:int = 20,
+                 health:int = 100,
+                 stamina:int = 100):
+        self.star_balance = star_balance
+        self.power = power
+        self.health = health
+        self.stamina = stamina
+
+    def attack(self, player):
+        if self.stamina >= 10:
+            if self.health <= 30:
+               player.health -= self.power * 3
+               self.stamina -= 10
+            else:
+                if bool(random.getrandbits(1)):
+                    player.health -= self.power * (self.star_balance / 10 + 1)
+                    print(f'Критический удар! Здоровье игрока = {player.health}')
+                    self.stamina -= 10
+                else:
+                    player.health -= self.power
+                    print(f'Удар! Здоровье игрока = {player.health}')
+                    self.stamina -= 5
 
 
 class item:
