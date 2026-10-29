@@ -26,17 +26,19 @@ class Player:
         self.stamina = stamina
 
     def training(self):
+        stamina_error, health_error = False, False
         if self.power == 100:
             print('Ваша сила достагла максимального уровня, тренировка не требуется')
         elif self.stamina >= 20 and self.health >= 40:
-            if self.power + 6 <= 100:
+            if self.power + 5 < 100:
                 self.power += 5
                 self.stamina -= 10
                 print(f'Успешная тренировка, Ваша сила повышена до {self.power}')
             else:
+                diff = (100 - self.power) * 2
+                self.stamina -= diff
                 self.power = 100
-                self.stamina -= (100 - self.power) * 2
-                print(f'Успешная лёгкая тренировка, Ваша сила повышена до максимального уровня, расход выносливости составил {(100 - self.power) * 2}')
+                print(f'Успешная лёгкая тренировка, Ваша сила повышена до максимального уровня, расход выносливости составил {diff}')
         else:
             if self.stamina < 20:
                 stamina_error = True
@@ -51,18 +53,18 @@ class Player:
                 print('Для тренировки недостаточно здоровья')
 
     def treatment(self, points):
-        st_pt = points / 2  # расход стамины на запрашиваемое игроком лечение
+        st_pt = points // 2  # расход стамины на запрашиваемое игроком лечение
         if self.health == 100:
             print('Лечение не требуется, ваше здоровье максимально')
-        elif self.stamine >= st_pt + 5:
-            if self.health + (st_pt + 1) <= 100:
+        elif self.stamina >= st_pt + 5:
+            if self.health + points < 100:
                 self.health += points
                 self.stamina -= st_pt
                 print(f'Успешное лечение принесло {points} здоровья! Текущее значение: {self.health}')
             else:
-                self.health = 100
                 st_pt = int((100 - self.health) / 2)
                 self.stamina -= st_pt
+                self.health = 100
                 print(f'Здоровье повышено до максимум, расход выносливости составил {st_pt}')
         else:
             print(f'Для лечения недостаточно выносливости, отдохните. Текущий показатель: {self.health}')
@@ -71,7 +73,7 @@ class Player:
         if self.stamina == 100:
             print('Уровень вашей выносливости максимальный, отдых не требуется')
         else:
-            if self.stamina + 31 <= 100:
+            if self.stamina + 31 < 100:
                 self.stamina += 30
                 print(f'Выносливость восстановлена до {self.stamina}')
             else:
@@ -81,9 +83,9 @@ class Player:
     def rebirth(self):
         if self.health == 100 and self.power == 100 and self.stamina == 100:
             self.star_balance += 1
-        self.health = 40
-        self.power = 20
-        self.stamina = 0
+            self.health = 40
+            self.power = 20
+            self.stamina = 0
 
 
 class shop:
