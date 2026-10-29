@@ -208,3 +208,34 @@ class shop:
             print('Предмет успешно продан!')
         else:
             print(f'В вашем инвентаре нет такого предмета :C')
+
+    def apply_discount(self, percent:int = 0):
+        self.price = int(self.price - self.price * percent / 100)
+
+class Ending:
+    def __init__(self,
+                 title:str = 'None',
+                 description:str = 'None',
+                 is_secret:bool = False,
+                 required_stars:int = 0):
+        self.title = title
+        self.description = description
+        self.is_secret = is_secret
+        self.required_stars = required_stars
+
+    def show_title(self):
+        print(f'Приключение окончено: {self.title}')
+        print(f'{self.description}')
+
+class SecretEnding(Ending):
+    def __init__(self,
+                 title:str = 'None',
+                 description:str = 'None',
+                 required_stars:int = 0):
+        super().__init__(title, description)
+        self.is_secret = True
+        self.required_stars = required_stars
+
+    def show_title(self):
+        print(f'Секретная концовка!')
+        super().show_title()
