@@ -141,12 +141,32 @@ class shop:
                  shop_item: item = None,
                  price:int = 0,
                  amount:int = 0,
+                 min_player_lvl:int = 0
                  ):
         self.shop_item = shop_item
         self.price = price
         self.amount = amount
+        self.min_player_lvl = min_player_lvl
 
     def buy_item(self, player):
+        if self.amount == 0:
+            print('Предмета нет в наличии :C')
+            return
+        if self.min_player_lvl > player.star_balance:
+            print('Уровень вашего персонажа слишком мал для покупки этого преддмета')
+            return
+        if self.price <= player.money_balance:
+            player.inventory.append(self.shop_item)
+            player.money_balance -= self.price
+            self.amount -= 1
+            print(f"Предмет {self.shop_item.name} успешно куплен!")
+        else:
+            print(f'Для покупки недостаточно {self.price - player.money_balance} монет')
 
     def sell_item(self, player):
-
+        if self.shop_item in player.inventory:
+            player.inventory.remove(self.shop_item)
+            player.money_balance += int(self.price * 0.7)
+            print('Предмет успешно продан!')
+        else:
+            print(f'В вашем инвентаре нет такого предмета :C')
